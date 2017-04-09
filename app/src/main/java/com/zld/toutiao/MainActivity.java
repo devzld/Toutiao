@@ -5,6 +5,8 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
@@ -50,11 +52,38 @@ public class MainActivity extends BaseAppCompatActivity {
 
     @Override
     protected void initViewsAndEvents() {
-        setSupportActionBar(toolbar);
+        setToolbar();
+        addTab();
+    }
+
+    private void addTab() {
         tlMain.addTab(tlMain.newTab().setText("头条"));
         tlMain.addTab(tlMain.newTab().setText("国内"));
         tlMain.addTab(tlMain.newTab().setText("娱乐"));
         tlMain.addTab(tlMain.newTab().setText("体育"));
+        tlMain.addTab(tlMain.newTab().setText("头条"));
+        tlMain.addTab(tlMain.newTab().setText("国内"));
+        tlMain.addTab(tlMain.newTab().setText("娱乐"));
+        tlMain.addTab(tlMain.newTab().setText("体育"));
+    }
+
+    private void setToolbar() {
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        //菜单按钮可用
+        actionBar.setHomeButtonEnabled(true);
+
+        //回退按钮可用
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        //将drawerlayout和toolbar绑在一起
+        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this,dlMain,toolbar,R.string.app_name,R.string.app_name);
+        //初始化状态
+        drawerToggle.syncState();
+        dlMain.setDrawerListener(drawerToggle);
+
+        toolbar.setTitle(R.string.app_name);
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
+
     }
 
     @Override
